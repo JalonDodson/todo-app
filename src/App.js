@@ -15,13 +15,14 @@ function App() {
   // addTodoItem is called from both the actual button on our app, and when the user presses enter, while the input box is focused.
   // It updates our component's state and adds our todo item to our todo list. It then clears the todo input's content, for additional input.
   const addTodoItem = () => {
-    setTodoItemsState(items => items = [...items, {
-      id: items.length,
-      content: todoInputState,
-      completed: false
-    }]);
-    setTodoInputState('');
-
+    if (todoInputState.length > 0) {
+        setTodoItemsState(items => items = [...items, {
+          id: items.length,
+          content: todoInputState,
+          completed: false
+        }]);
+        setTodoInputState('');
+    }
   };
   // handleInputKeyDown will allow is to check which keys the user is pressing. We will use this to keep track of when the user presses 'enter',
   // which will be taken as the user has finished inserting their todo item and would like to submit it. This enhances user experience, so that
