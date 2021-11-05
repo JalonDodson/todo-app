@@ -16,15 +16,16 @@ function App() {
   // It updates our component's state and adds our todo item to our todo list. It then clears the todo input's content, for additional input.
   const addTodoItem = () => {
     if (todoInputState.length > 0) {
-        setTodoItemsState(items => items = [...items, {
-          id: items.length,
-          content: todoInputState,
-          completed: false
-        }]);
-        setTodoInputState('');
+      let id = todoItems.length > 0 ? todoItems[todoItems.length - 1].id + 1 : 0;
+      setTodoItemsState(items => items = [...items, {
+        id: id,
+        content: todoInputState,
+        completed: false
+      }]);
+      setTodoInputState('');
     }
   };
-  
+
   // handleInputKeyDown will allow is to check which keys the user is pressing. We will use this to keep track of when the user presses 'enter',
   // which will be taken as the user has finished inserting their todo item and would like to submit it. This enhances user experience, so that
   // they don't have to press a button to do so, but rather keep their fingers on the keyboard.
@@ -69,17 +70,17 @@ function App() {
             todoItems.map(item => {
               return (
                 <>
-                <div className='item-wrapper'>
+                  <div className='item-wrapper'>
 
-                  <li onClick={() => checkTodoItem(item.id)} className='todo-item' style={{ backgroundColor: item.completed ? 'rgb(94, 255, 0)' : 'rgb(0, 217, 255)' }}>
-                    <div className="content">
-                      <p>ID: {item.id}</p>
-                      Todo: {item.content}
+                    <li onClick={() => checkTodoItem(item.id)} className='todo-item' style={{ backgroundColor: item.completed ? 'rgb(94, 255, 0)' : 'rgb(0, 217, 255)' }}>
+                      <div className="content">
+                        <p>ID: {item.id}</p>
+                        Todo: {item.content}
+                      </div>
+                    </li>
+                    <div className="actions">
+                      <button className="remove-item" onClick={() => removeTodoItem(item.id)}>X</button>
                     </div>
-                  </li>
-                  <div className="actions">
-                    <button className="remove-item" onClick={() => removeTodoItem(item.id)}>X</button>
-                  </div>
                   </div>
                 </>
               )
