@@ -21,8 +21,8 @@ function App() {
       completed: false
     }]);
     setTodoInputState('');
-
   };
+  
   // handleInputKeyDown will allow is to check which keys the user is pressing. We will use this to keep track of when the user presses 'enter',
   // which will be taken as the user has finished inserting their todo item and would like to submit it. This enhances user experience, so that
   // they don't have to press a button to do so, but rather keep their fingers on the keyboard.
@@ -40,7 +40,7 @@ function App() {
     console.log(todoItems);
     setTodoItemsState(todoList);
   }
-  
+
   // removeTodoItem removes an item from our todo list. It receives one argument, id, which corresponds to the todo item's id that is passed in 
   // via the 'X' button. A variable, todoList, is declared, and a filter method is applied. This method returns an array that contains every item
   // except the item that needs to be removed. Our state is then changed to match the newly created todoList variable.
