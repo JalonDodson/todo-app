@@ -8,6 +8,7 @@ function App() {
   // This will allow us to enhance user experience for small features such as clear the text box after a user is done inserting an item.
   // It will also be easier to track what the user wants to add, which will allow us to continue on with more intricate parts of the app.
   const [todoInputState, setTodoInputState] = useState('');
+  const [counter, setCounter] = useState(0);
 
   // todoItems and setTodoItemsState will manage our actual todo list. As todo items are added, they will populate in our todoItems state.
   const [todoItems, setTodoItemsState] = useState([]);
@@ -16,13 +17,13 @@ function App() {
   // It updates our component's state and adds our todo item to our todo list. It then clears the todo input's content, for additional input.
   const addTodoItem = () => {
     if (todoInputState.length > 0) {
-      let id = todoItems.length > 0 ? todoItems[todoItems.length - 1].id + 1 : 0;
       setTodoItemsState(items => items = [...items, {
-        id: id,
+        id: counter,
         content: todoInputState,
         completed: false
       }]);
       setTodoInputState('');
+      setCounter(c => c+=1)
     }
   };
 
@@ -39,8 +40,11 @@ function App() {
   // We're then able to set the state of our todo items to match our todoList variable, which contains the updated information.
   const checkTodoItem = id => {
     const todoList = [...todoItems];
-    todoItems[id].completed = !todoItems[id].completed;
-    console.log(todoItems);
+    todoList.map(t => {
+      if (t.id === id) t.completed = !t.completed;
+      return t;
+    })
+    console.log(todoList);
     setTodoItemsState(todoList);
   }
 
